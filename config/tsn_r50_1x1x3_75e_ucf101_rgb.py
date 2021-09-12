@@ -101,6 +101,11 @@ optimizer_config = dict(grad_clip=dict(max_norm=40, norm_type=2))
 lr_config = dict(policy='step', step=[])
 total_epochs = 75
 
+DEVICE_ID = 0
+AMP = True
+OPT_LEVEL = "O2"
+LOSS_SCALE = 128.0
+
 # runtime settings
 checkpoint_config = dict(interval=5)
 work_dir = f'./work_dirs/tsn_r50_1x1x3_75e_ucf101_split_{split}_rgb/'
