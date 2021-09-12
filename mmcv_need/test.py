@@ -38,13 +38,18 @@ def single_gpu_test(model, data_loader):
         list: The prediction results.
     """
     model.eval()
+    times = []
     results = []
     for data in data_loader:
+        batch_size = data['imgs'].shape[0]
+        start = time.time()
         with torch.no_grad():
             result = model(return_loss=False, **data)
+        end = time.time()
         results.extend(result)
+        times.append(batch_size/(end - start))
 
-    return results
+    return results, times
 
 
 def multi_gpu_test(model, data_loader, tmpdir=None, gpu_collect=False, flag=False):
