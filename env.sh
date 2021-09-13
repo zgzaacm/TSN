@@ -15,4 +15,4 @@ rm -rf mmcv-master/
 /bin/cp -f mmcv_need/iter_timer.py mmcv/runner/hooks/iter_timer.py
 /bin/cp -f mmcv_need/optimizer.py mmcv/runner/hooks/optimizer.py
 /bin/cp -f mmcv_need/test.py mmcv/engine/test.py
-rm mmcv_need/transformer.py mmcv/cnn/bricks/transformer.py
+/bin/cp -f mmcv_need/transformer.py mmcv/cnn/bricks/transformer.py
