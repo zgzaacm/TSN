@@ -39,7 +39,10 @@ class EpochBasedRunner(BaseRunner):
             outputs = self.batch_processor(
                 self.model, data_batch, train_mode=train_mode, **kwargs)
         elif train_mode:
-            outputs = self.model.train_step(data_batch, self.optimizer, **kwargs)
+            with torch.autograd.profiler.profile(use_cuda=True) as prof:
+                outputs = self.model.train_step(data_batch, self.optimizer, **kwargs)
+            print(prof.key_averages().table(sort_by="self_cpu_time_total"))
+            prof.export_chrome_trace("output.prof")
         else:
             outputs = self.model.val_step(data_batch, self.optimizer, **kwargs)
         if not isinstance(outputs, dict):

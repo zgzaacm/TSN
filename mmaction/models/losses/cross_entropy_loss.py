@@ -1,4 +1,18 @@
-# Copyright 2020 Huawei Technologies Co., Ltd## Licensed under the Apache License, Version 2.0 (the "License");# you may not use this file except in compliance with the License.# You may obtain a copy of the License at## http://www.apache.org/licenses/LICENSE-2.0## Unless required by applicable law or agreed to in writing, software# distributed under the License is distributed on an "AS IS" BASIS,# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.# See the License for the specific language governing permissions and# limitations under the License.# ============================================================================import torch
+# Copyright 2020 Huawei Technologies Co., Ltd
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+# http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+# ============================================================================
+import torch
 import torch.nn.functional as F
 
 from ..builder import LOSSES
@@ -77,7 +91,7 @@ class CrossEntropyLoss(BaseWeightedLoss):
                 kwargs['weight'] = self.class_weight.to(cls_score.device)
             cls_score = cls_score.type(torch.float32)
             label = label.type(torch.int32)
-            loss_cls = F.cross_entropy(cls_score, label, **kwargs)
+            loss_cls = F.cross_entropy(cls_score, label.long(), **kwargs)
 
         return loss_cls
 
