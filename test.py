@@ -176,7 +176,7 @@ def inference_pytorch(args, cfg, distributed, data_loader):
 
     if not distributed:
         model = model.cuda()
-        outputs = single_gpu_test(model, data_loader)
+        outputs, times = single_gpu_test(model, data_loader)
     else:
         model = MMDistributedDataParallel(
             model.cuda(),
